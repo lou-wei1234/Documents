@@ -1,67 +1,37 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+rows = 5
 
-class linked_list:
-    def __init__(self):
-       self.head = None
+array_2d = [['Student No.', 'Student Name','Quiz 1', 'Quiz 2', 'Quiz 3', 'Quiz Total', 'Class Part.', 'Exam', 'Grade', 'Remarks']]
 
-    def insert(self, data):
-        new_node = Node(data)
+'''
+ 0           1               2   3   4   5   6   7     8        9
+|Student No.|Student Name   |q1 |q2 |q3 |qT |cp |exam |grade   |remarks   |
 
-        if self.head is None:
-            self.head = new_node
-        else:
-            current = self.head
-            while current.next:
-                current = current.next
-            current.next = new_node
-               
-    def display(self):
-        target_value = "LINUS TORVALDS"       
-        arr = []
-        current_target_char = 0
-        current = self.head
+0          1            2   3   4   5   6
+102030400, Bob Waffles, 89, 78, 99, 69, 78
+102430480, Mark Pancakes, 60, 60, 60, 60, 60
+172031450, Jerry Cereals, 75, 78, 60, 69, 50
+132730409, Maxx Noodles, 86, 78, 60, 69, 60
+102131401, Kaff Bread, 60, 78, 60, 69, 78
+'''
 
-        """
-        I tried two ways of doing this, one with for loop and the other is while loop.
-        nested for loop where each iteration of the outer loop will put the current node to starting node again
-        
-        for i in target_value:
-            current = self.head
-            for _ in target_value:
-                if i == " ":
-                    arr.append(i)
-                    break
-                if str(current.data) == i: 
-                    arr.append(str(current.data))
-                    break
-                current = current.next
+for i in range(rows):
+    row_input = input(f"enter Student {i + 1} ")
+    row_values = row_input.split(',')
+    row_values = [item.strip() for item in row_values]
+    
+    
+    quiz_total = (int(row_values[2])+ int(row_values[3]) + int(row_values[4]))/3
+    grade = (int(row_values[5])*.1) + (quiz_total*.4) + (int(row_values[6])*.5)
+    if grade >= 75:
+        remark = "Passed"
+    else:
+        remark = "Failed"
 
-        while loop where when the current node in the iteration reaches the last node, the current node will go back
-        to the starting node again
-        """
-        
-        while current_target_char < len(target_value):
-            if current is None:
-                current = self.head
-            if target_value[current_target_char] == " ":
-                arr.append(" ")
-                current_target_char += 1
-            if current.data == target_value[current_target_char]:
-                arr.append(str(current.data))
-                current_target_char += 1
-            current = current.next
-            
-        for i in arr:
-            print(i, end="")
+    row_values.insert(5, f"{quiz_total:.2f}")
+    row_values.insert(8, f"{grade:.2f}")
+    row_values.insert(9, remark)
 
-input_values = ['I', 'S', 'L', 'T', 'O', 'R', 'N', 'S', 'U', 'D', 'L', 'A', 'V']
+    array_2d.append(row_values)
 
-my_linked_list = linked_list()
-
-for value in input_values:
-    my_linked_list.insert(value)
-
-my_linked_list.display()
+for row in array_2d:
+    print("|{:<12}|{:<20}|{:<12}|{:<12}|{:<12}|{:<12}|{:<12}|{:<12}|{:<12}|{:<12}|".format(*row))
