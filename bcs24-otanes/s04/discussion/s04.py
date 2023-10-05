@@ -14,11 +14,11 @@ array_2d = [['Student No.', 'Student Name','Quiz 1', 'Quiz 2', 'Quiz 3', 'Quiz T
 102131401, Kaff Bread, 60, 78, 60, 69, 78
 '''
 
+print("Example Input: 102030400, Bob Waffles, 89, 78, 99, 69, 78")
 for i in range(rows):
-    row_input = input(f"enter Student {i + 1} ")
+    row_input = input(f"Enter Student {i + 1} Information: ")
     row_values = row_input.split(',')
     row_values = [item.strip() for item in row_values]
-    
     
     quiz_total = (int(row_values[2])+ int(row_values[3]) + int(row_values[4]))/3
     grade = (int(row_values[5])*.1) + (quiz_total*.4) + (int(row_values[6])*.5)
