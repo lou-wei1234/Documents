@@ -43,3 +43,41 @@ class Stack:
                 print(temp.data)
                 temp = temp.next
 
+class Palindrome:
+    def __init__(self, input):
+        self.input = input
+
+    def check(self): #create an instance of Stack and push each character of the input to the object
+        stack = Stack()
+        for i in self.input:
+            stack.push(i)
+
+        temp = stack.top 
+        while temp: #show every value of all nodes and the popped values to prepare for comparison
+            self.compare(temp.data, stack.pop())
+            temp = temp.next
+        
+    def compare(self, first, second):
+        print(first, second)    #i am trying to attempt to compare the data in first node, thinking it was the at the stack.top
+                                #but the stack.top actually contains the last node created and not the first node that was created (LIFO)
+                                #so when i print the stack.top and stack.pop, they are just the same
+palindrome = Palindrome("banana")
+palindrome.check()
+
+"""
+DESIRED OUTPUT
+a b
+n a
+a n
+n a
+a n
+b a
+
+CURRENT OUTPUT
+a a
+n n
+a a
+n n
+a a
+b b
+"""
